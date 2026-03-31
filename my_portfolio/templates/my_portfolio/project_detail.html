@@ -18,20 +18,19 @@
     {% endif %}
 
     <div class="description" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 3rem; color: #eee;">
-        <!-- The |safe filter allows your <img> tags in the description to work -->
         {{ project.description|safe|linebreaksbr }}
     </div>
 
-    <!-- Project Links (GitHub and PyPI) -->
+    <!-- Project Links -->
     <div style="margin: 4rem 0; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
         {% if project.github_url %}
-        <a href="{{ project.github_url }}" target="_blank" style="display: inline-block; padding: 1rem 2rem; background: #181717; color: #fff; text-decoration: none; border-radius: 30px; font-weight: bold; letter-spacing: 1px; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        <a href="{{ project.github_url }}" target="_blank" style="display: inline-block; padding: 1rem 2rem; background: #181717; color: #fff; text-decoration: none; border-radius: 30px; font-weight: bold; letter-spacing: 1px;">
             <i class="fab fa-github"></i> SOURCE CODE
         </a>
         {% endif %}
 
         {% if project.pypi_url %}
-        <a href="{{ project.pypi_url }}" target="_blank" style="display: inline-block; padding: 1rem 2rem; background: #3775a9; color: #fff; text-decoration: none; border-radius: 30px; font-weight: bold; letter-spacing: 1px; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 10px rgba(55,117,169,0.3);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        <a href="{{ project.pypi_url }}" target="_blank" style="display: inline-block; padding: 1rem 2rem; background: #3775a9; color: #fff; text-decoration: none; border-radius: 30px; font-weight: bold; letter-spacing: 1px;">
             <i class="fab fa-python"></i> PyPI INDEX
         </a>
         {% endif %}
@@ -44,7 +43,10 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
             {% for item in project.gallery.all %}
             <div style="background: #111; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid #222;">
-                <img src="{{ item.image.url }}" alt="{{ item.caption }}" style="width: 100%; display: block;">
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.caption }}" style="width: 100%; display: block; height: auto;">
+                {% endif %}
+
                 {% if item.caption %}
                 <div style="padding: 1rem; font-size: 0.9rem; color: #ccc; text-align: center; background: #1a1a1a;">
                     {{ item.caption }}
