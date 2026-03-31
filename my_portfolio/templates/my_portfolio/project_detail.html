@@ -1,0 +1,53 @@
+{% extends "my_portfolio/base.html" %}
+
+{% block content %}
+<article class="project-detail">
+    <header style="margin-bottom: 2rem;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">{{ project.title }}</h1>
+        {% if project.short_description %}
+        <p style="font-style: italic; color: #aaa; font-size: 1.2rem; margin-top: 0;">
+            {{ project.short_description }}
+        </p>
+        {% endif %}
+    </header>
+
+    {% if project.main_image %}
+    <div class="main-image" style="margin-bottom: 3rem;">
+        <img src="{{ project.main_image.url }}" alt="{{ project.title }}" style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    </div>
+    {% endif %}
+
+    <div class="description" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 3rem; color: #eee;">
+        <!-- The |safe filter allows your <img> tags in the description to work -->
+        {{ project.description|safe|linebreaksbr }}
+    </div>
+
+    {% if project.github_url %}
+    <div style="margin: 3rem 0; text-align: center;">
+        <a href="{{ project.github_url }}" target="_blank" style="display: inline-block; padding: 1rem 2rem; background: #3D0101; color: #fff; text-decoration: none; border-radius: 30px; font-weight: bold; letter-spacing: 1px; transition: opacity 0.2s;">
+            <i class="fab fa-github"></i> SOURCE CODE
+        </a>
+    </div>
+    {% endif %}
+
+    <!-- Automatic Gallery Section -->
+    {% if project.gallery.all %}
+    <section class="gallery" style="margin-top: 5rem; border-top: 1px solid #333; padding-top: 3rem;">
+        <h2 style="margin-bottom: 2rem; text-align: center;">PROJECT DEMOS</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            {% for item in project.gallery.all %}
+            <div style="background: #111; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid #222;">
+                <img src="{{ item.image.url }}" alt="{{ item.caption }}" style="width: 100%; display: block;">
+                {% if item.caption %}
+                <div style="padding: 1rem; font-size: 0.9rem; color: #ccc; text-align: center; background: #1a1a1a;">
+                    {{ item.caption }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+</article>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "my_portfolio/base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>{{ resume.label }} Resume</h1>
+<div class="resume-container" style="height: 80vh;">
+    <iframe src="{% static 'pdf/' %}{{ resume.file_path }}" width="100%" height="100%">
+        This browser does not support PDFs. Please download the PDF to view it: <a href="{% static 'pdf/' %}{{ resume.file_path }}">Download PDF</a>
+    </iframe>
+</div>
+{% endblock %}
