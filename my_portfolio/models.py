@@ -6,6 +6,7 @@ class Project(models.Model):
     short_description = models.CharField(max_length=300, blank=True, help_text="A brief one-sentence summary (italicized on page).")
     description = models.TextField()
     github_url = models.URLField(blank=True, null=True)
+    pypi_url = models.URLField(blank=True, null=True, verbose_name="PyPI URL")
     main_image = models.ImageField(upload_to='projects/main/', blank=True, null=True)
 
     def __str__(self):
