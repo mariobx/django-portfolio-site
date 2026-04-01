@@ -2,10 +2,11 @@ from django.shortcuts import render, get_object_or_404
 from django.http import FileResponse
 from django.conf import settings
 import os
-from .models import Project, Resume
+from .models import Project, Resume, HomePage
 
 def home(request):
-    return render(request, 'my_portfolio/home.html')
+    home_content = HomePage.objects.first()
+    return render(request, 'my_portfolio/home.html', {'home_content': home_content})
 
 def project_detail(request, slug):
     project = get_object_or_404(Project, slug=slug)

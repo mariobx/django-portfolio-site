@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'my_portfolio',
+    'embed_video',
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'OPTIONS': {
+            'timeout': 20,
+        }
     }
 }
 
@@ -135,4 +139,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+# Allow Referer headers to be sent to cross-origin sites (Fixes YouTube Error 153)
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
