@@ -2,6 +2,9 @@ name: Deploy Static Site
 
 on:
   workflow_dispatch:
+  # Optional: Uncomment below to run every time you push to your source repo
+  # push:
+  #   branches: [ main ]
 
 jobs:
   build-and-deploy:
@@ -9,7 +12,10 @@ jobs:
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
-        # LFS removed
+        with:
+          # fetch-depth: 0 is required for the sitemap to read git history 
+          # for the "lastmod" (last modified) dates.
+          fetch-depth: 0 
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -35,6 +41,17 @@ jobs:
           git config --global http.postBuffer 524288000
           python manage.py distill-local output --force
 
+      - name: Generate XML Sitemap
+        uses: cicirello/generate-sitemap@v1
+        with:
+          # Tells the action to look inside the folder Django just built
+          path-to-root: output
+          base-url-path: https://mariobx.github.io/
+          drop-html-extension: true
+          include-pdf: true
+          # This saves sitemap.xml directly into the output folder for deployment
+          sitemap-path: output/sitemap.xml
+
       - name: Deploy to Website Repo
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -44,5 +61,5 @@ jobs:
           publish_branch: main
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
-          commit_message: "Automated deployment"
+          commit_message: "Automated deployment with Sitemap"
           force_orphan: true
