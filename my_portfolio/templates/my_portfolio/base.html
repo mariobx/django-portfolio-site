@@ -1,8 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FJ39KC54R4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-FJ39KC54R4');
+    </script>
+    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Forced fixed width for mobile to prevent compression/stacking -->
+    <meta name="viewport" content="width=1200">
     <title>Mario Marku - Portfolio</title>
     {% load static %}
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
@@ -16,19 +27,21 @@
             display: flex; 
             flex-direction: column; 
             line-height: 1.5; 
-            background: #121212; /* Correct Black */
+            background: #121212; 
             color: #fff;
             font-size: 0.95rem;
+            min-width: 1200px; /* Force desktop width on mobile */
         }
         
         nav { 
-            background: #4A0404; /* Correct Red */
+            background: #4A0404; 
             color: #fff; 
             padding: 0.75rem 2rem; 
             display: flex; 
             align-items: center; 
             gap: 2.5rem; 
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            min-width: 1200px;
         }
         nav a { color: #fff; text-decoration: none; transition: opacity 0.2s; }
         nav a:hover { opacity: 0.7; }
@@ -39,7 +52,7 @@
             position: absolute; 
             top: 100%; 
             left: 0;
-            background: #4A0404; /* Correct Red */
+            background: #4A0404; 
             min-width: 220px; 
             z-index: 1000; 
             border-radius: 0 0 4px 4px;
@@ -58,7 +71,7 @@
         
         main { 
             flex: 1; 
-            padding: 2rem 2rem; 
+            padding: 3rem 2rem; 
             max-width: 1400px; 
             margin: 0 auto; 
             width: 100%;
@@ -66,13 +79,14 @@
         }
         
         footer { 
-            background: #4A0404; /* Correct Red */
+            background: #4A0404; 
             color: #fff; 
             padding: 1rem 2rem; 
             display: flex; 
             justify-content: space-between; 
             align-items: center;
             font-size: 0.9rem;
+            min-width: 1200px;
         }
         footer a { color: #fff; text-decoration: none; transition: opacity 0.2s; }
         footer a:hover { opacity: 0.7; }
