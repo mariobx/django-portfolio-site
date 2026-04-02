@@ -25,11 +25,13 @@ class ProjectImage(models.Model):
     video_url = models.URLField(blank=True, null=True, help_text="OR paste a YouTube URL.")
     video_id = models.CharField(max_length=20, blank=True, null=True, editable=False)
     blocked_embed = models.BooleanField(default=False, help_text="Check this if YouTube blocks embedding.")
+    order = models.PositiveIntegerField(default=0, help_text="Lower numbers appear first.")
     caption = models.CharField(max_length=200, blank=True)
 
     class Meta:
         verbose_name = "Project Media"
         verbose_name_plural = "Project Media"
+        ordering = ['order', 'id']
 
     def clean(self):
         if self.image and self.video_url:

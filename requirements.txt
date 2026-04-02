@@ -2,6 +2,7 @@ asgiref==3.11.1
 certifi==2026.2.25
 charset-normalizer==3.4.6
 Django==6.0.3
+django-distill==3.2.7
 django-embed-video==1.4.10
 idna==3.11
 pillow==12.1.1
