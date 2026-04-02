@@ -41,12 +41,17 @@
     <section class="gallery-wrapper" style="margin-top: 5rem; border-top: 1px solid #333; padding-top: 3rem;">
         <h2 style="margin-bottom: 3rem; text-align: center; letter-spacing: 2px;">PROJECT GALLERY</h2>
         
-        <div class="masonry-grid" style="column-count: 3; column-gap: 2.5rem; width: 100%;">
+        <style>
+            .masonry-grid { column-count: 3; column-gap: 2.5rem; width: 100%; }
+            @media (max-width: 900px) { .masonry-grid { column-count: 2; } }
+            @media (max-width: 600px) { .masonry-grid { column-count: 1; } }
+        </style>
+
+        <div class="masonry-grid">
             {% for item in project.gallery.all %}
             <div class="masonry-item" style="break-inside: avoid; margin-bottom: 2.5rem; background: #1a1a1a; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid #333; display: flex; flex-direction: column;">
                 
                 {% if item.video_id %}
-                    <!-- Video keeps aspect ratio -->
                     <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #000; overflow: hidden;">
                         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
                             {% if item.blocked_embed %}
@@ -66,7 +71,6 @@
                         </div>
                     </div>
                 {% elif item.image %}
-                    <!-- Image is natural height, 100% information retained -->
                     <img src="{{ item.image.url }}" alt="{{ item.caption }}" style="width: 100%; height: auto; display: block;">
                 {% endif %}
 
